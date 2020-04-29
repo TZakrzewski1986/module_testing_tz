@@ -65,12 +65,15 @@ class StringHandlerTest {
      * Hint: look at {@link #shouldMergeTwoArraysWithCorrectOrder}
      */
     @Test
-    void test1() {
+    void shouldReturnNull() {
         // given
+        String[] isNullExample = new String[]{};
 
         // when
+        String result = stringHandler.create(isNullExample);
 
         // then
+        assertThat(result).isNull();
     }
 
     /**
@@ -84,12 +87,18 @@ class StringHandlerTest {
      * Hint: look at {@link #shouldMergeTwoArraysWithCorrectOrder}
      */
     @Test
-    void test2() {
+    void shouldCreateStringFromGivenObject() {
         // given
+        String[] cars = new String[] {"Opel", "Fiat", "Yamaha", "Suzuki"};
+        String expectedResult = "OpelFiatYamahaSuzuki";
 
         // when
+        String result = stringHandler.create(cars);
 
         // then
+        assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(expectedResult);
+
     }
 
     /**

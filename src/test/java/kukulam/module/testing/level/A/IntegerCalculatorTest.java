@@ -55,6 +55,7 @@ public class IntegerCalculatorTest {
         int result = calculator.subtract(a, b);
 
         // then
+        assertThat(result).isEqualTo(5);
 
     }
 
@@ -70,10 +71,16 @@ public class IntegerCalculatorTest {
     @Test
     void shouldMultiplyTwoIntegersCorrectly() {
         // given
+        int a = 2;
+        int b = 5;
+
+        IntegerCalculator integerCalculator = new IntegerCalculator();
 
         // when
+        int result = integerCalculator.multiply(a, b);
 
         // then
+        assertThat(result).isEqualTo(10);
     }
 
     /**
@@ -85,10 +92,15 @@ public class IntegerCalculatorTest {
     @Test
     void shouldCalculateSquareNumber() {
         // given
+        int a = 4;
+
+        IntegerCalculator integerCalculator = new IntegerCalculator();
 
         // when
+        int result = integerCalculator.power(a);
 
         // then
+        assertThat(result).isEqualTo(16);
 
     }
 
@@ -125,16 +137,25 @@ public class IntegerCalculatorTest {
      * but REMEMBER to rename method and change value of arguments.
      * 3. Write test, like in {@link #shouldAddTwoIntegersCorrectlyParameterizedTest}.
      */
-    @Disabled
     @ParameterizedTest()
     @MethodSource("subtractTwoIntegersArguments")
     void shouldSubtractTwoIntegersCorrectlyParameterizedTest(int a, int b, int expectedResult) {
         // given
+        IntegerCalculator integerCalculator = new IntegerCalculator();
 
         // when
+        int result = integerCalculator.subtract(a, b);
 
         // then
+        assertThat(result).isEqualTo(expectedResult);
+    }
 
+    static Stream<Arguments> subtractTwoIntegersArguments() {
+        return Stream.of(
+                arguments(10, 5, 5),
+                arguments(20, 10, 10),
+                arguments(8, 4, 4)
+        );
     }
 
 }

@@ -4,6 +4,8 @@ import org.assertj.core.api.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 /*
@@ -112,15 +114,59 @@ class StringHandlerTest {
      * Hint: look at {@link #shouldMergeTwoArraysWithCorrectOrder}
      */
     @Test
-    void test3() {
+    void shouldAddTwoArraysWithStrings() {
         // given
+        String[] firstArray = new String[] {"One", "Two"};
+        String[] secondArray = new String[] {"Three", "Four"};
+        String[] expectedResult = new String[] {"One", "Two", "Three", "Four"};
 
         // when
+        String[] result = stringHandler.add(firstArray, secondArray);
 
         // then
+        assertThat(result).isNotNull();
+        assertThat(result).containsExactly(expectedResult);
     }
 
     /**
      * TODO EXTRA: write all possible tests for {@link StringHandler#convert(String, boolean)}}
      */
+    @Test
+    void shouldReturnEmptyAfterConvert() {
+        // When
+        String[] result = stringHandler.convert(null, true);
+
+        // Then
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void shouldReturnArrayWithUpperCase() {
+        // Given
+        String[] expectedResult = new String[] {"A", "A", "A"};
+
+        // When
+        String[] result = stringHandler.convert("aaa", true);
+
+        //Then
+        assertThat(result).isNotNull();
+        assertThat(result.length).isEqualTo(3);
+        assertThat(result).containsExactly(expectedResult);
+        System.out.println(Arrays.toString(result));
+    }
+
+    @Test
+    void shouldReturnArrayWithLowerCase() {
+        // Given
+        String[] expectedResult = new String[] {"a", "a", "a"};
+
+        // When
+        String[] result = stringHandler.convert("AaA", false);
+
+        //Then
+        assertThat(result).isNotNull();
+        assertThat(result.length).isEqualTo(3);
+        assertThat(result).containsExactly(expectedResult);
+        System.out.println(Arrays.toString(result));
+    }
 }

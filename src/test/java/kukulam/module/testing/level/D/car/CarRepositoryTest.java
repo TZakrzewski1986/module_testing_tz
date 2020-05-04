@@ -8,10 +8,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.assertj.core.api.*;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 /*
     advanced tests
  */
 class CarRepositoryTest {
+
+    private CarRepository carRepository;
+
+    @BeforeEach
+    void beforeEach() {
+        carRepository = new CarRepository();
+        System.out.println("New object created!");
+    }
+
+    @AfterEach
+    void cleanUpEach() {
+        carRepository = null;
+        System.out.println("After Each cleanUpEach() method called");
+    }
+
     /**
      * TODO: write test for methods {@link CarRepository#findAll()}, {@link CarRepository#add(Car)}
      * 1. Initialize/clean {@link CarRepository} with annotations: {@link BeforeEach}, {@link AfterEach}.
@@ -24,7 +41,24 @@ class CarRepositoryTest {
      * Hint: look at {@link PersonRepositoryTest#shouldFindAllAddedPeople()}
      * Remember about annotation {@link Test} before test method
      */
-    void shouldFindAllAddedCars() {
+    @Test
+    public void shouldFindAllAddedCars() {
+        // Given
+        Car opelCorsa = new Car("Opel Corsa", 12);
+        Car alfaRomeo = new Car("Alfa Romeo", 10);
+        Car bmwX1 = new Car("Bmw X1", 3);
+
+        // When
+        carRepository.add(opelCorsa);
+        carRepository.add(alfaRomeo);
+        carRepository.add(bmwX1);
+
+        // and
+        Car[] foundCars = carRepository.findAll();
+
+        // Then
+        assertThat(foundCars.length).isEqualTo(3);
+        assertThat(foundCars).containsExactly(opelCorsa, alfaRomeo, bmwX1);
 
     }
 

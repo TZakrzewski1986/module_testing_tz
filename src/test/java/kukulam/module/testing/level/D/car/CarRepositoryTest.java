@@ -74,7 +74,26 @@ class CarRepositoryTest {
      * Hint: look at {@link PersonRepositoryTest#shouldFindPeopleByAge()}
      * Remember about annotation {@link Test} before test method
      */
+    @Test
     void shouldFindCarsByAge() {
+        // Given
+        Car opelCorsa = new Car("Opel Corsa", 12);
+        Car alfaRomeo = new Car("Alfa Romeo", 10);
+        Car bmwX1 = new Car("Bmw X1", 3);
+
+        int age = 10;
+
+        // When
+        carRepository.add(opelCorsa);
+        carRepository.add(alfaRomeo);
+        carRepository.add(bmwX1);
+
+        // and
+        Car[] cars = carRepository.findByAge(age);
+
+        // Then
+        assertThat(cars.length).isEqualTo(1);
+        assertThat(cars).containsExactly(alfaRomeo);
 
     }
 
@@ -89,11 +108,51 @@ class CarRepositoryTest {
      * {@link PeopleAgeAssert#hasAge(int)}
      * Remember about annotation {@link Test} before test method
      */
+    @Test
     void shouldFindCarsByAgeWithOwnAssertion() {
+        // Given
+        Car opelCorsa = new Car("Opel Corsa", 12);
+        Car alfaRomeo = new Car("Alfa Romeo", 10);
+        Car bmwX1 = new Car("Bmw X1", 3);
+
+        int age = 10;
+
+        // When
+        carRepository.add(opelCorsa);
+        carRepository.add(alfaRomeo);
+        carRepository.add(bmwX1);
+
+        // and
+        Car[] cars = carRepository.findByAge(age);
+
+        // Then
+        CarAgeAssert.assertThat(cars).hasAge(10);
 
     }
 
     /**
      * TODO EXTRA: write test for method {@link CarRepository#findByName(String)}
      */
+
+    @Test
+    void shouldFindCarsByName() {
+        // Given
+        Car opelCorsa = new Car("Opel Corsa", 12);
+        Car alfaRomeo = new Car("Alfa Romeo", 10);
+        Car bmwX1 = new Car("Bmw X1", 3);
+
+        String carsName = "Opel Corsa";
+
+        // When
+        carRepository.add(opelCorsa);
+        carRepository.add(alfaRomeo);
+        carRepository.add(bmwX1);
+
+        // and
+        Car[] cars = carRepository.findByName(carsName);
+
+        // Then
+        assertThat(cars).containsExactly(opelCorsa);
+        assertThat(cars.length).isEqualTo(1);
+    }
 }
